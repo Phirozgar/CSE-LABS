@@ -3,7 +3,7 @@
 #include <math.h>
 
 #define MAX_FACTORS 1024
-static int opCount = 0;
+int opCount = 0;
 
 // Struct to store factors of a number
 typedef struct
@@ -24,7 +24,7 @@ void findPrimeFactors(int number, primeFactors* pf)
 
         // Check if i is a divisor of remaining and count its exponent
         while (remaining % i == 0) {
-            opCount++;
+            ++opCount;
             exponentCount++;
             remaining = remaining / i;
         }
@@ -47,7 +47,7 @@ void display(int number, primeFactors pf)
 
     // Loop through the factors and display them starting from index 1
     for (int i = 1; i <= pf.size; i++) {
-        opCount++;
+        ++opCount;
         printf("%d", pf.factors[i]);
         // If the exponent is greater than 1, display it
         if (pf.freq[i] > 1) 
@@ -76,16 +76,18 @@ int gcdUsingMiddleSchoolProcedure(int num1, int num2)
     while (i <= factors1.size && j <= factors2.size) {
         if (factors1.factors[i] < factors2.factors[j]) {
             i++;  // Move to the next factor of num1
+            ++opCount;
         }
         else if (factors2.factors[j] < factors1.factors[i]) {
             j++;  // Move to the next factor of num2
+            ++opCount;
         }
         else { // If both factors are the same
             int minExponent = (factors1.freq[i] < factors2.freq[j]) ? factors1.freq[i] : factors2.freq[j];
             // Multiply by the smallest exponent of the common factor
             int factorPower = 1;
             for (int k = 0; k < minExponent; k++) {
-                opCount++;
+                ++opCount;
                 factorPower *= factors1.factors[i];
             }
             gcd *= factorPower;
