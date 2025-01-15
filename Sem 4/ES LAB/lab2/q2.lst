@@ -1,0 +1,131 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET, DATA, READONLY
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         __Vectors
+    4 00000000 10001000        DCD              0X10001000
+    5 00000004 00000000        DCD              Reset_Handler
+    6 00000008                 ALIGN
+    7 00000008                 AREA             mycode, CODE, READONLY
+    8 00000000                 ENTRY
+    9 00000000                 EXPORT           Reset_Handler
+   10 00000000         Reset_Handler
+   11 00000000         
+   12 00000000         ; Load address of source variable (into R0)
+   13 00000000 4804            LDR              R0, =SRC    ; Load source varia
+                                                            ble address
+   14 00000002         ; Load address of destination variable (into R1)
+   15 00000002 4905            LDR              R1, =DST    ; Load destination 
+                                                            variable address
+   16 00000004         ; Load 32-bit value from source memory location in R0 to
+                        R2
+   17 00000004 6802            LDR              R2, [R0]    ; Load value from s
+                                                            ource
+   18 00000006         ; Store 32-bit value to destination memory location R1 f
+                       rom R2
+   19 00000006 600A            STR              R2, [R1]    ; Store value to de
+                                                            stination
+   20 00000008         
+   21 00000008         STOP
+   22 00000008 E7FE            B                STOP        ; Infinite loop to 
+                                                            halt processor
+   23 0000000A         
+   24 0000000A 00 00 00000008 
+                       SRC     DCD              8           ; Source variable w
+                                                            ith 32-bit value
+   25 00000010 00000000 
+                       DST     DCD              0           ; Destination varia
+                                                            ble initialized to 
+                                                            zero
+   26 00000014         
+   27 00000014         END
+                       
+              00000000 
+              00000000 
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=.\q2.d -
+o.\q2.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\NX
+P\LPC17xx --predefine="__EVAL SETA 1" --list=.\q2.lst q2.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 1 in file q2.s
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 3 in file q2.s
+   Uses
+      At line 2 in file q2.s
+Comment: __Vectors used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+DST 00000010
+
+Symbol: DST
+   Definitions
+      At line 25 in file q2.s
+   Uses
+      At line 15 in file q2.s
+Comment: DST used once
+END 00000014
+
+Symbol: END
+   Definitions
+      At line 27 in file q2.s
+   Uses
+      None
+Comment: END unused
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 10 in file q2.s
+   Uses
+      At line 5 in file q2.s
+      At line 9 in file q2.s
+
+SRC 0000000C
+
+Symbol: SRC
+   Definitions
+      At line 24 in file q2.s
+   Uses
+      At line 13 in file q2.s
+Comment: SRC used once
+STOP 00000008
+
+Symbol: STOP
+   Definitions
+      At line 21 in file q2.s
+   Uses
+      At line 22 in file q2.s
+Comment: STOP used once
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 7 in file q2.s
+   Uses
+      None
+Comment: mycode unused
+6 symbols
+341 symbols in table
