@@ -1,0 +1,359 @@
+	¯ Database
+		· collection of data in some format
+		
+		
+	¯ Types of Database
+		a. Relational (RDBMS) 
+			§ data stored in tables
+			§ MySQL
+			§ ORACLE 
+			§ Microsoft SQL Server
+			§ Postgre SQL
+			
+		b.  Non-Relational (NoSQL) - data stored in tables 
+			§ data stored in tables
+			§ MongoDB
+	
+
+	¯ SQL - structured Query Language
+		· used on relational databases
+		· used for CRUD operations
+			§ Create
+			§ Read
+			§ Update
+			§ Delete
+		
+	¯ DATABASE COMMANDS
+		1. CREATE   DATABASE  IF NOT EXISTS  db_name ;
+		2. DROP   DATABASE   IF EXISTS   db_name ;
+		3. USE   db_name ;
+		
+		CREATE  DATABASE   IF NOT EXISTS   db_name - good practice to add an IF NOT EXISTS statement before your CREATE DATABASE command so you don’t get error if same database already exists
+		4. SHOW   DATABASES ;
+		5. SHOW   TABLES ;
+
+
+	¯ TABLE QUERIES
+		1. CREATE
+		CREATE TABLE table_name (
+			col_name1    data_type    constraint ,
+			col_name2    data_type    constraint 
+		) ;
+		
+		2. INSERT
+		INSERT  INTO  table_name  VALUES ( data1 , data2 , data3 ) ;
+	
+		INSERT   INTO   table_name
+		(col_name1 , col_name2)
+		VALUES
+		(col1_v1 , col2_v1) , (col1_v2 , col2_v2) ;
+		
+	 3.  DROP - deletes table
+		DROP TABLE   table_name ;
+	 
+	 4.   UPDATE & SET
+		UPDATE   table_name
+		SET   col1 = v1    WHERE   col2 = v2 ;
+	
+	 5.    DELETE 
+		DELETE  FROM   table_name 
+		WHERE   condition ;
+	
+         6.   TRUNCATE -  deletes data from table
+		 TRUNCATE  TABLE   table_name ;
+		
+		
+	¯ SQL DATATYPES
+		· CHAR (n)  -  stores string till fixed length n
+		· VARCHAR (n) - can store string value up to n length
+		· BLOB (n) - stores large binary objects  
+		· INT
+		· TINYINT
+		· BIGINT
+		· BIT (n) - store n bits between 1 & 64
+		· FLOAT
+		· DOUBLE
+		· BOOLEAN
+		· DATE - date in YYYY-MM-DD
+		· YEAR - year in YYYY format but between 1901 & 2155 
+
+
+
+	¯ TYPES OF SQL COMMANDS
+		· DDL (data definition) 
+			§ create
+			§ alter
+			§ rename
+			§ truncate
+			§ drop
+		· DQL (data query)
+			§ select
+		· DML (data manipulation)
+			§ insert
+			§ update
+			§ delete
+		· DCL (data control)
+			§ grant / revoke permission to users
+		· TCL (transaction control)
+			§ start transaction
+			§ commit
+			§ rollback
+
+
+	¯ KEYS
+		· PRIMARY KEY
+			§ each table has only 1 primary key 
+			§ primary key is a 1 or more columns that have a unique value for each entry
+			§ should be NOT NULL
+		· FOREIGN KEY
+			§ each table can have 1 or more 
+			§ it’s a primary key of 1 table that’s referred to in another table  
+			§ can have multiple values or null values
+			§ 
+
+
+	¯ CONSTRAINTS
+		1. NOT NULL - can't have null value
+		
+		2. UNIQUE - all values should be different
+		
+		3. PRIMARY KEY - makes a column unique and not null   id  INT  PRIMARY KEY
+			§ alternate syntax is - id INT ,
+							      PRIMARY KEY (id) 
+			§ if more than 1 variable is passed in PRIMARY KEY it means that the combination of those variables should be UNIQUE 
+			
+		4. FOREIGN KEY
+			§ FOREIGN KEY  (fk_col_t2)  references   table_1  (pk_col_t1)
+			
+		5. DEFAULT - sets a default value for the whole column
+		
+		6. CHECK 
+			§ limits values added to table
+			§  CONSTRAINT   constr_name   CHECK   (conditions) 
+
+
+
+	¯ CLAUSES
+		1. SELECT
+			§ SELECT   col1,col2    FROM    table ;                     -  to select column 1 and column 2 
+			§ SELECT   *   FROM    table ;                                    -  to get all the data in the table
+			§ SELECT  DISTINCT  col1,col2   FROM   table ;      - to get only distinct values from col1 and col2
+			
+		2. WHERE
+			§ used to specify conditions
+			§ SELECT  *  FROM  table  WHERE  condition
+			§ OPERATORS 
+				□ Arithmetic -   +   -   *   /   %
+				□ Comparison -   =   !=   >   >=   <   <= 
+				□ Logical -   AND   OR   NOT   IN()   BETWEEN-AND   ALL   LIKE   ANY
+				□ Bitwise -   &   |
+			§ used when conditions are to be applied on rows
+			
+		3. LIMIT 
+			§ sets an upper limit on number of rows to be returned
+			§ gives that many items from top of the table
+			§ SELECT   col1,col2    FROM    table   LIMIT    number ;
+			
+		4. ORDERBY 
+			§ SELECT   col1,col2    FROM  table   ORDER BY  col1  ASC/DESC
+			§ default order is ascending
+			
+		5. AGGREGATE FUNCTIONS
+			§ COUNT(col)
+					® gives output as 0 if data is NULL
+			§ MAX(col)
+			§ MIN(col)
+			§ SUM(col)
+			§ AVG(col)
+			
+		6. GROUP BY 
+			§ groups rows having same values into summary rows
+			§ collects the data related to a member and groups result into 1 or more columns
+			§ used with aggregate functions
+			§ SELECT col1,col3,   function(col2)   FROM table    GROUP BY   col1,col3
+			§ you have to GROUP elements BY at least as many values as you have SELECTed
+			
+		7. HAVING
+			§ similar to WHERE , applies some condition but on groups
+			§ used when we want to  group data with a condition
+			§ put after GROUP BY clause
+			
+		8. FOREIGN KEYS
+			§ CASCADING
+				▫ done if want changes to occur in child table when parent table is updated
+				▫ ON UPDATE CASCADE
+				ON DELETE CASCADE
+		9. ALTER 
+			§ changes the schema of a table ( columns , data type , constraint )
+			§ ALTER TABLE table_name
+				▫ ADD COLUMN   col_name   data type    constraint ;
+				▫ DROP COLUMN   col_name ;
+				▫ RENAME TO   new_table_name ;
+				▫ CHANGE   old_col_name     new_col_name  new_datatype  new_constr ;
+				▫ MODIFY   col_name  new_datatype  new_constr ;
+		10. JOINS
+			§ joins 2 tables based on common data
+			§ whatever you write in the ON statement is the column  that will pull in remaining data of that row from that table 
+			§ SELECT  column(s) 
+			FROM  tableA  _______  tableB
+			ON  tableB.col_name  =  tableA
+			.col_name  ;
+			§ INNER JOIN 
+				▫ returns records having matching values in both tables
+			§ LEFT JOIN 
+				▫ returns all data from tableA and common data from tableB 
+			§ RIGHT JOIN
+				▫ returns all data from tableB and common data from tableA 
+			§ (FULL JOIN) 
+				▫ returns all data from tableA and tableB
+				▫ done by doing LEFT JOIN and RIGHT JOIN 
+				▫ (LEFT JOIN)
+				UNION
+				(RIGHT JOIN)
+			§ (L/R EXCL JOIN)
+				▫ (L/R JOIN)   WHERE   tableB/A .col_name   IS NULL ;
+			§ (SELF) JOIN
+				
+		11. UNION
+			§ combines unique records into result set from 2 or more SELECT statements
+			§ BUT every SELECT statement should have same number of columns and should be in same order
+			§ UNION ALL gives all duplicates 
+			§ UNION gives only unique values
+			
+		12. SUBQUERY
+			§ SELECT   col1,col2
+			FROM    table_name
+			WHERE   col_name   operator   (subquery) ;
+			§ changes answers dynamically
+			§ don’t have to change value manually since it is dynamically calculated
+			
+		13. VIEWS
+			§ virtual smaller table  that shows up-to-date data
+			§ view is created every time it is queried
+			§ CREATE VIEW   view1   AS
+			SELECT   col1,col2   FROM   table_name ;
+		
+
+
+				
+	¯ GENERAL ORDER
+			
+			SELECT    column(s)
+			FROM    table
+			WHERE    condition
+			GROUP BY    column(s)
+			HAVING    condition
+			ORDER BY    column(s)   ASC ;
+			
+			
+			
+			
+	¯ NEW CLAUSES
+	
+		1. DISTINCT(id) 
+				▫  gives distinct values of the id, that is removes the duplicated data and returns unique ones
+				
+		2. LENGTH(sentence) 
+				▫ counts number of bytes in a string
+				
+		3. CHAR_LENGHT(word) 
+				▫ counts number of characters in string
+				
+				
+		4. TIME RELATED FUNCTIONS
+						i) HOUR
+							} extracts hour part of a time
+							} SELECT HOUR ('12:34:56') 
+						ii) MINUTE 
+						iii) SECOND
+						iv) TIME_TO_SEC
+							} converts given time into seconds passed since midnight
+							} SELECT SEC_TO_TIME(45296) 
+						v) SEC_TO_TIME
+							} converts given seconds passed since midnight into time 
+						vi) TIME_DIFF
+							} gives difference in HH:MM:SSSS format
+							} SELECT TIMEDIFF('12:34:56', '10:30:00') ;
+						vii) TIMESTAMPDIFF
+							} gives difference in specified units
+							} SELECT TIMESTAMPDIFF( UNITS , '2024-06-10  12:34:56'  ,  '2024-06-10  14:34:56' )
+						viii) TIME_FORMAT
+							} returns time in specified format
+							} SELECT TIME_FORMAT('12:34:56', '%h:%i %p') ;  --->  12:34 PM
+						ix) DATE_FORMAT
+							} DATE_FORMAT (date , format)
+								– %Y: Year, numeric, four digits (2024)
+								– %y: Year, numeric, two digits (24)
+								
+								– %m: Month, numeric (06)
+								– %b: Month name, abbreviated (Jun)
+								– %M: Month name, full (June)
+								– %d: Day of the month, numeric (17)
+								
+								– %H: 24 Hour (00-23)
+								– %h: 12 Hour (01-12)
+								
+								– %i: Minutes, numeric (30)
+								– %s: Seconds, numeric (45)
+								– %f: Microseconds (123456)
+								– %p: AM or PM
+								
+								– %w: Day of the week (0=Sunday, 6=Saturday)
+								– %a: Day name, abbreviated (Mon)
+								– %W: Day name, full (e.g., Monday)
+								
+								– %U: Week (00-53), where Sunday is the first day of the week
+								– %u: Week (00-53), where Monday is the first day of the week
+								– %V: Week (01-53), where Sunday is the first day of the week, used with %X
+								– %v: Week (01-53), where Monday is the first day of the week, used with %x
+								
+								– %X: Year for the week where Sunday is the first day, four digits, used with %V
+								– %x: Year for the week where Monday is the first day, four digits, used with %v
+							
+						x) NOW()
+								– returns current date and time in YYYY-
+							
+						xi) DATEDIFF(date2 , date1) 
+								– gives integer difference of number of days in (date2 - date1)
+								– if date2 is before date1, it returns negative value
+							
+						xii) DATE_ADD(date , interval expr unit)
+								– date - starting date you want to add or subtract to 
+								– interval - number you want to add / subtract
+								– expr -   +  or   -
+								– unit - DAY / WEEK / MONTH / YEAR 
+								
+				
+			
+		5. LAG (col_name , n) 
+		
+				□ fetches the data from col_name, 'n' rows above the selected data
+				□ SELECT balance - LAG(balance , 1)     --->     will give me    (balance2 - balance1)
+				
+		6. LEAD (col_name , n) 
+		
+		7. ROUND(____ , n)
+				□ rounds up that answer to n digits
+			
+		8. WITH 
+				□ helps to rename a table as something
+				□ WITH new_table_name AS (
+						SELECT    column(s)
+						FROM    table
+						WHERE    condition
+						)
+		9. COALESCE / IFNULL
+				□ handles null values by giving another default number if null value is found
+				□ COALESCE ( expression , default_num )
+				□ IFNULL ( expression , default_num )
+			
+		10. CASE
+				□ switch case statement
+				□ CASE
+					WHEN condition THEN col_name
+				END (condition like ASC DESC)
+		11. OVER
+				□ used to define a window or a subset of rows within a query's result set
+				□ OVER (
+						PARTITION BY  expression / col_name
+					    )
