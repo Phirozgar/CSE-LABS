@@ -1,0 +1,56 @@
+CLEAR SCREEN;
+
+DROP TABLE employee;
+DROP TABLE department;
+
+CREATE TABLE employee(
+     EmpNo number(4) primary key,
+     EmpName varchar(100) not null,
+     Gender char(1) NOT NULL CHECK(Gender IN ('M','F')),
+     Salary NUMBER(10,2) NOT NULL,
+     Address VARCHAR(300) NOT NULL,
+     DNo number(2));
+
+CREATE TABLE department(
+     DeptNo NUMBER(2) PRIMARY KEY,
+     DeptName VARCHAR(100) UNIQUE NOT NULL);
+
+ALTER TABLE employee
+	ADD CONSTRAINT depno 
+	FOREIGN KEY (dno) REFERENCES department(deptno);
+
+INSERT INTO department VALUES (1, 'HR');
+INSERT INTO department VALUES (2, 'Finance');
+INSERT INTO department VALUES (3, 'Engineering');
+INSERT INTO employee VALUES (1001, 'Phirozgar Irani', 'M', 50000.00, '123 Python Street', 1);
+INSERT INTO employee VALUES (1002, 'Bhargavi Naik', 'F', 60000.00, '456 Baobao Avenue', 2);
+INSERT INTO employee VALUES (1003, 'Pakhi Jain', 'F', 75000.00, '789 Bucky Road', 3);
+
+--violates foreign key constraint as deptno = 5 doesn't exist
+INSERT INTO employee VALUES (1004, 'Mark Lee', 'M', 55000.00, '101 Maple Drive', 5);
+-- violates CHECK constraint on Gender because 'X' isn't valid
+INSERT INTO employee VALUES (1006, 'Samuel Green', 'X', 50000.00, '303 Cedar Lane', 2);
+
+UPDATE employee SET empno = 1003 WHERE empno != 1003;
+UPDATE department SET deptno = 4 WHERE deptno != 4;
+
+ALTER TABLE employee 
+	DROP CONSTRAINT depno;
+ALTER TABLE employee 
+	ADD CONSTRAINT depno 
+	FOREIGN KEY (dno) REFERENCES department(deptno) ON DELETE CASCADE;
+
+ALTER TABLE employee
+	MODIFY salary DEFAULT 10000;
+
+ALTER TABLE employee
+	ADD CONSTRAINT default_salary
+	CHECK(salary >= 10000);
+
+ALTER TABLE employee
+    MODIFY salary DEFAULT 10000 CONSTRAINT default_salary;
+
+
+ALTER TABLE employee
+	DROP COLUMN salary;
+	
