@@ -1,0 +1,18 @@
+	AREA	RESET, DATA, READONLY
+	EXPORT __Vectors
+__Vectors
+		DCD 0X10001000
+		DCD Reset_Handler
+		ALIGN
+		AREA	mycode, CODE, READONLY
+		ENTRY
+		EXPORT Reset_Handler
+Reset_Handler
+	MOV R0, #4
+	MLA R1, R0, R0, R0
+	MOVS R1, R1, LSR #1
+STOP 
+	B STOP
+N1 DCD 0x11111001
+N2 DCD 0x11111101
+END
