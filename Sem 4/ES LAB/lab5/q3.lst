@@ -1,0 +1,183 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET, DATA, READONLY
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         __Vectors
+    4 00000000 10001000        DCD              0X10001000
+    5 00000004 00000000        DCD              Reset_Handler
+    6 00000008                 ALIGN            4
+    7 00000008                 AREA             mycode, CODE, READONLY
+    8 00000000                 ENTRY
+    9 00000000                 EXPORT           Reset_Handler
+   10 00000000         Reset_Handler
+   11 00000000 F000 F81D       BL               REGLOADER
+   12 00000004 4818            LDR              R0, =SRC
+   13 00000006 4685            MOV              SP, R0
+   14 00000008 E8AD 07FE       STMIA            SP!, {R1-R10}
+   15 0000000C F04F 0100       MOV              R1, #0      ; Outer loop offset
+                                                            
+   16 00000010         OUTER
+   17 00000010 460A            MOV              R2, R1      ; Minimum element i
+                                                            ndex
+   18 00000012 F101 0304       ADD              R3, R1, #4  ; Inner loop offset
+                                                            
+   19 00000016         INNER
+   20 00000016 5884            LDR              R4, [R0, R2] ; Get min. ele.
+   21 00000018 58C5            LDR              R5, [R0, R3] ; Get current ele.
+                                                            
+   22 0000001A 42A5            CMP              R5, R4
+   23 0000001C BF38 461A       MOVLO            R2, R3      ; If current ele. <
+                                                             min. ele., rewrite
+                                                             min. index
+   24 00000020 F103 0304       ADD              R3, #4      ; Update inner loop
+                                                             offset
+   25 00000024 2B28            CMP              R3, #40
+   26 00000026 D1F6            BNE              INNER       ; if R3 != 40, cont
+                                                            inue INNER
+   27 00000028 5886            LDR              R6, [R0, R2]
+   28 0000002A 5847            LDR              R7, [R0, R1]
+   29 0000002C 5046            STR              R6, [R0, R1]
+   30 0000002E 5087            STR              R7, [R0, R2] ; Swap current out
+                                                            er loop ele. and di
+                                                            scovered min. ele.
+   31 00000030 F101 0104       ADD              R1, #4      ; Update outer loop
+                                                             offset
+   32 00000034 2924            CMP              R1, #36
+   33 00000036 D1EB            BNE              OUTER       ; if R1 != 36, cont
+                                                            inue
+   34 00000038 E93D 07FE       LDMDB            SP!, {R1-R10}
+   35 0000003C         STOP
+   36 0000003C E7FE            B                STOP
+   37 0000003E         REGLOADER
+   38 0000003E F04F 0102       MOV              R1, #2
+   39 00000042 F04F 0204       MOV              R2, #4
+   40 00000046 F04F 0307       MOV              R3, #7
+   41 0000004A F04F 0401       MOV              R4, #1
+   42 0000004E F04F 0503       MOV              R5, #3
+   43 00000052 F04F 0609       MOV              R6, #9
+   44 00000056 F04F 0700       MOV              R7, #0
+   45 0000005A F04F 0806       MOV              R8, #6
+   46 0000005E F04F 0905       MOV              R9, #5
+   47 00000062 F04F 0A08       MOV              R10, #8
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   48 00000066 4770            BX               LR
+   49 00000068                 ALIGN
+   50 00000068 00000000        AREA             mydata, DATA, READWRITE
+   51 00000000 00000000 
+                       SRC     DCD              0
+   52 00000004                 END
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=.\q3.d -
+o.\q3.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\NX
+P\LPC17xx --predefine="__EVAL SETA 1" --list=.\q3.lst lab5\q3.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 1 in file lab5\q3.s
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 3 in file lab5\q3.s
+   Uses
+      At line 2 in file lab5\q3.s
+Comment: __Vectors used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+INNER 00000016
+
+Symbol: INNER
+   Definitions
+      At line 19 in file lab5\q3.s
+   Uses
+      At line 26 in file lab5\q3.s
+Comment: INNER used once
+OUTER 00000010
+
+Symbol: OUTER
+   Definitions
+      At line 16 in file lab5\q3.s
+   Uses
+      At line 33 in file lab5\q3.s
+Comment: OUTER used once
+REGLOADER 0000003E
+
+Symbol: REGLOADER
+   Definitions
+      At line 37 in file lab5\q3.s
+   Uses
+      At line 11 in file lab5\q3.s
+Comment: REGLOADER used once
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 10 in file lab5\q3.s
+   Uses
+      At line 5 in file lab5\q3.s
+      At line 9 in file lab5\q3.s
+
+STOP 0000003C
+
+Symbol: STOP
+   Definitions
+      At line 35 in file lab5\q3.s
+   Uses
+      At line 36 in file lab5\q3.s
+Comment: STOP used once
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 7 in file lab5\q3.s
+   Uses
+      None
+Comment: mycode unused
+6 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+SRC 00000000
+
+Symbol: SRC
+   Definitions
+      At line 51 in file lab5\q3.s
+   Uses
+      At line 12 in file lab5\q3.s
+Comment: SRC used once
+mydata 00000000
+
+Symbol: mydata
+   Definitions
+      At line 50 in file lab5\q3.s
+   Uses
+      None
+Comment: mydata unused
+2 symbols
+343 symbols in table

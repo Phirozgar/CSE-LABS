@@ -1,0 +1,230 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET, DATA, READONLY
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         __Vectors
+    4 00000000 10001000        DCD              0X10001000
+    5 00000004 00000000        DCD              Reset_Handler
+    6 00000008                 ALIGN            4
+    7 00000008                 AREA             mycode, CODE, READONLY
+    8 00000000                 ENTRY
+    9 00000000                 EXPORT           Reset_Handler
+   10 00000000         Reset_Handler
+   11 00000000 4815            LDR              R0, =NUM    ; Numbers to push/p
+                                                            op
+   12 00000002 4916            LDR              R1, =FAS    ; Full Ascending st
+                                                            ack top pointer
+   13 00000004 4A16            LDR              R2, =EDS+20 ; Empty descending 
+                                                            stack top pointer
+   14 00000006 F04F 0300       MOV              R3, #0      ; Offset variable
+   15 0000000A         PUSHLOOP
+   16 0000000A 58C4            LDR              R4, [R0, R3] ; Fetch number
+   17 0000000C F101 0104       ADD              R1, #4      ; Increment FA stac
+                                                            k pointer
+   18 00000010 600C            STR              R4, [R1]    ; Store to FA stack
+                                                            
+   19 00000012 6014            STR              R4, [R2]    ; Store to ED stack
+                                                            
+   20 00000014 F1A2 0204       SUB              R2, R2, #4  ; Decrement ED stac
+                                                            k pointer
+   21 00000018 F103 0304       ADD              R3, #4      ; Update offset
+   22 0000001C 2B14            CMP              R3, #20
+   23 0000001E D1F4            BNE              PUSHLOOP    ; If offset != 20, 
+                                                            continue
+   24 00000020 4D10            LDR              R5, =OFA    ; Pop storage for F
+                                                            A stack
+   25 00000022 4E11            LDR              R6, =OED    ; Pop storage for E
+                                                            D stack
+   26 00000024 F04F 0300       MOV              R3, #0      ; Reset offset vari
+                                                            able
+   27 00000028         POPLOOP
+   28 00000028 6808            LDR              R0, [R1]    ; Load top element 
+                                                            from FA stack
+   29 0000002A F1A1 0104       SUB              R1, R1, #4  ; Decrement FA stac
+                                                            k pointer
+   30 0000002E 50E8            STR              R0, [R5, R3] ; Store FA top
+   31 00000030 F102 0204       ADD              R2, #4      ; Increment ED stac
+                                                            k pointer
+   32 00000034 6810            LDR              R0, [R2]    ; Load top element 
+                                                            from ED stack
+   33 00000036 50F0            STR              R0, [R6, R3] ; Store ED top
+   34 00000038 F103 0304       ADD              R3, #4      ; Update offset
+   35 0000003C 2B14            CMP              R3, #20
+   36 0000003E D1F3            BNE              POPLOOP     ; If offset != 20, 
+                                                            continue
+   37 00000040         STOP
+   38 00000040 E7FE            B                STOP
+   39 00000042 00 00           ALIGN
+   40 00000044 00000001 
+              00000002 
+              00000003 
+              00000004 
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+              00000005 NUM     DCD              1, 2, 3, 4, 5
+   41 00000058 00000000 
+              00000000 
+              00000014 
+              00000000 
+              00000000         AREA             mydata, DATA, READWRITE
+   42 00000000 00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 FAS     DCD              0, 0, 0, 0, 0, 0
+   43 00000018 00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 EDS     DCD              0, 0, 0, 0, 0, 0
+   44 00000030 00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 OFA     DCD              0, 0, 0, 0, 0
+   45 00000044 00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 OED     DCD              0, 0, 0, 0, 0
+   46 00000058                 END
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=.\q6.d -
+o.\q6.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\NX
+P\LPC17xx --predefine="__EVAL SETA 1" --list=.\q6.lst lab5\q6.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 1 in file lab5\q6.s
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 3 in file lab5\q6.s
+   Uses
+      At line 2 in file lab5\q6.s
+Comment: __Vectors used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+NUM 00000044
+
+Symbol: NUM
+   Definitions
+      At line 40 in file lab5\q6.s
+   Uses
+      At line 11 in file lab5\q6.s
+Comment: NUM used once
+POPLOOP 00000028
+
+Symbol: POPLOOP
+   Definitions
+      At line 27 in file lab5\q6.s
+   Uses
+      At line 36 in file lab5\q6.s
+Comment: POPLOOP used once
+PUSHLOOP 0000000A
+
+Symbol: PUSHLOOP
+   Definitions
+      At line 15 in file lab5\q6.s
+   Uses
+      At line 23 in file lab5\q6.s
+Comment: PUSHLOOP used once
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 10 in file lab5\q6.s
+   Uses
+      At line 5 in file lab5\q6.s
+      At line 9 in file lab5\q6.s
+
+STOP 00000040
+
+Symbol: STOP
+   Definitions
+      At line 37 in file lab5\q6.s
+   Uses
+      At line 38 in file lab5\q6.s
+Comment: STOP used once
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 7 in file lab5\q6.s
+   Uses
+      None
+Comment: mycode unused
+6 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+EDS 00000018
+
+Symbol: EDS
+   Definitions
+      At line 43 in file lab5\q6.s
+   Uses
+      At line 13 in file lab5\q6.s
+Comment: EDS used once
+FAS 00000000
+
+Symbol: FAS
+   Definitions
+      At line 42 in file lab5\q6.s
+   Uses
+      At line 12 in file lab5\q6.s
+Comment: FAS used once
+OED 00000044
+
+Symbol: OED
+   Definitions
+      At line 45 in file lab5\q6.s
+   Uses
+      At line 25 in file lab5\q6.s
+Comment: OED used once
+OFA 00000030
+
+Symbol: OFA
+   Definitions
+      At line 44 in file lab5\q6.s
+   Uses
+      At line 24 in file lab5\q6.s
+Comment: OFA used once
+mydata 00000000
+
+Symbol: mydata
+   Definitions
+      At line 41 in file lab5\q6.s
+   Uses
+      None
+Comment: mydata unused
+5 symbols
+346 symbols in table

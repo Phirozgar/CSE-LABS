@@ -1,0 +1,222 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET, DATA, READONLY
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         __Vectors
+    4 00000000 10001000        DCD              0X10001000
+    5 00000004 00000000        DCD              Reset_Handler
+    6 00000008                 ALIGN            4
+    7 00000008                 AREA             mycode, CODE, READONLY
+    8 00000000                 ENTRY
+    9 00000000                 EXPORT           Reset_Handler
+   10 00000000         Reset_Handler
+   11 00000000 F000 F818       BL               MEMINIT     ; Function to initi
+                                                            alize R/W mem. with
+                                                             array.
+   12 00000004 481B            LDR              R0, =SRC    ; Get base index of
+                                                             array
+   13 00000006 F04F 0100       MOV              R1, #0      ; Outer loop offset
+                                                            
+   14 0000000A         OUTER
+   15 0000000A 460A            MOV              R2, R1      ; Minimum element i
+                                                            ndex
+   16 0000000C F101 0304       ADD              R3, R1, #4  ; Inner loop offset
+                                                            
+   17 00000010         INNER
+   18 00000010 5884            LDR              R4, [R0, R2] ; Get min. ele.
+   19 00000012 58C5            LDR              R5, [R0, R3] ; Get current ele.
+                                                            
+   20 00000014 42A5            CMP              R5, R4
+   21 00000016 BF38 461A       MOVLO            R2, R3      ; If current ele. <
+                                                             min. ele., rewrite
+                                                             min. index
+   22 0000001A F103 0304       ADD              R3, #4      ; Update inner loop
+                                                             offset
+   23 0000001E 2B28            CMP              R3, #40
+   24 00000020 D1F6            BNE              INNER       ; if R3 != 40, cont
+                                                            inue INNER
+   25 00000022 5886            LDR              R6, [R0, R2]
+   26 00000024 5847            LDR              R7, [R0, R1]
+   27 00000026 5046            STR              R6, [R0, R1]
+   28 00000028 5087            STR              R7, [R0, R2] ; Swap current out
+                                                            er loop ele. and di
+                                                            scovered min. ele.
+   29 0000002A F101 0104       ADD              R1, #4      ; Update outer loop
+                                                             offset
+   30 0000002E 2924            CMP              R1, #36
+   31 00000030 D1EB            BNE              OUTER       ; if R1 != 36, cont
+                                                            inue
+   32 00000032         STOP
+   33 00000032 E7FE            B                STOP
+   34 00000034         MEMINIT
+   35 00000034 4810            LDR              R0, =PRG    ; Load array base a
+                                                            ddress in RO area
+   36 00000036 4B0F            LDR              R3, =SRC    ; Load array base a
+                                                            ddress in RW area
+   37 00000038 F04F 0100       MOV              R1, #0      ; Loop offset
+   38 0000003C         LOOP
+   39 0000003C 5842            LDR              R2, [R0, R1]
+   40 0000003E 505A            STR              R2, [R3, R1] ; Transfer from PR
+                                                            G to SRC
+   41 00000040 F101 0104       ADD              R1, #4      ; Update loop offse
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+                                                            t
+   42 00000044 2928            CMP              R1, #40
+   43 00000046 D1F9            BNE              LOOP        ; If R1 != 40, cont
+                                                            inue
+   44 00000048 4770            BX               LR          ; Return
+   45 0000004A 00 00           ALIGN
+   46 0000004C 00000002 
+              00000001 
+              00000007 
+              00000006 
+              00000008 
+              00000000 
+              00000009 
+              00000005 
+              00000004 
+              00000003 PRG     DCD              2,1,7,6,8,0,9,5,4,3
+   47 00000074 00000000 
+              00000000 
+              00000000         AREA             mydata, DATA, READWRITE
+   48 00000000 00000000 
+                       SRC     DCD              0
+   49 00000004                 END
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=.\q1.d -
+o.\q1.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\NX
+P\LPC17xx --predefine="__EVAL SETA 1" --list=.\q1.lst lab5\q1.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 1 in file lab5\q1.s
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 3 in file lab5\q1.s
+   Uses
+      At line 2 in file lab5\q1.s
+Comment: __Vectors used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+INNER 00000010
+
+Symbol: INNER
+   Definitions
+      At line 17 in file lab5\q1.s
+   Uses
+      At line 24 in file lab5\q1.s
+Comment: INNER used once
+LOOP 0000003C
+
+Symbol: LOOP
+   Definitions
+      At line 38 in file lab5\q1.s
+   Uses
+      At line 43 in file lab5\q1.s
+Comment: LOOP used once
+MEMINIT 00000034
+
+Symbol: MEMINIT
+   Definitions
+      At line 34 in file lab5\q1.s
+   Uses
+      At line 11 in file lab5\q1.s
+Comment: MEMINIT used once
+OUTER 0000000A
+
+Symbol: OUTER
+   Definitions
+      At line 14 in file lab5\q1.s
+   Uses
+      At line 31 in file lab5\q1.s
+Comment: OUTER used once
+PRG 0000004C
+
+Symbol: PRG
+   Definitions
+      At line 46 in file lab5\q1.s
+   Uses
+      At line 35 in file lab5\q1.s
+Comment: PRG used once
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 10 in file lab5\q1.s
+   Uses
+      At line 5 in file lab5\q1.s
+      At line 9 in file lab5\q1.s
+
+STOP 00000032
+
+Symbol: STOP
+   Definitions
+      At line 32 in file lab5\q1.s
+   Uses
+      At line 33 in file lab5\q1.s
+Comment: STOP used once
+mycode 00000000
+
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+Symbol: mycode
+   Definitions
+      At line 7 in file lab5\q1.s
+   Uses
+      None
+Comment: mycode unused
+8 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+SRC 00000000
+
+Symbol: SRC
+   Definitions
+      At line 48 in file lab5\q1.s
+   Uses
+      At line 12 in file lab5\q1.s
+      At line 36 in file lab5\q1.s
+
+mydata 00000000
+
+Symbol: mydata
+   Definitions
+      At line 47 in file lab5\q1.s
+   Uses
+      None
+Comment: mydata unused
+2 symbols
+345 symbols in table
