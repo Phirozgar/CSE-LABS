@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 Table & Image Animation</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        #move-wrapper {
+            position: relative;
+            left: 0;
+            transition: all 1.5s ease-in-out;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        img {
+            width: 300px;
+            border-radius: 8px;
+            display: block;
+        }
+
+        /* Triggered by JS */
+        .move-left {
+            transform: translateX(-100vw);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Cal's Moving Data</h1>
+    <button id="moveBtn">Move Table & Image Left</button>
+
+    <div id="move-wrapper">
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Project</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Parikshit Website</td>
+                <td>ongoing</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Ops & HRD</td>
+                <td>ongoing</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Project OpsFlow</td>
+                <td>Yet to start</td>
+            </tr>
+        </table>
+
+        <img src="/lab1/waterfall.jpg" alt="Sample 2026 Image">
+    </div>
+
+    <script>
+        const btn = document.getElementById('moveBtn');
+        const wrapper = document.getElementById('move-wrapper');
+
+        btn.addEventListener('click', () => {
+            wrapper.classList.toggle('move-left');
+
+            btn.textContent = wrapper.classList.contains('move-left') ?
+                "Move Back Right" : "Move Table & Image Left";
+        });
+    </script>
+
+</body>
+
+</html>
