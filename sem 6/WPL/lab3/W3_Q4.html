@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>VI CSE-B Timetable (B2)</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    th,
+    td {
+      text-align: center;
+      vertical-align: middle;
+      font-size: 14px;
+      width: min-content;
+    }
+
+    .lab {
+      background-color: #cfe2ff;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body class="bg-light">
+  <div class="container mt-4">
+
+    <!-- Dynamic Heading -->
+    <h3 class="text-center mb-3" id="dayHeading">Monday Timetable</h3>
+
+    <!-- Carousel -->
+    <div id="timetableCarousel" class="carousel slide" data-bs-ride="false">
+      <div class="carousel-inner">
+
+        <!-- MONDAY -->
+        <div class="carousel-item active" data-day="Monday">
+          <table class="table table-bordered">
+            <thead class="table-dark">
+              <tr>
+                <th>8–9</th>
+                <th>9–10</th>
+                <th>10–10:30</th>
+                <th>10:30–11:30</th>
+                <th>11:30–12:30</th>
+                <th>1–2</th>
+                <th>2–3</th>
+                <th>3–4:30</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Coursera</td>
+                <td>PCAP</td>
+                <td>—</td>
+                <td>CD</td>
+                <td>OE</td>
+                <td>—</td>
+                <td colspan="2" class="lab">CDL – B2</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- TUESDAY -->
+        <div class="carousel-item" data-day="Tuesday">
+          <table class="table table-bordered">
+            <thead class="table-dark">
+              <tr>
+                <th colspan="4">8:30–11:30</th>
+                <th>11:30–12:30</th>
+                <th>1–2</th>
+                <th>2–3</th>
+                <th>3–4:30</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="4" class="lab">WPL – B2</td>
+                <td>—</td>
+                <td>Coursera</td>
+                <td>CD</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- WEDNESDAY -->
+        <div class="carousel-item" data-day="Wednesday">
+          <table class="table table-bordered">
+            <thead class="table-dark">
+              <tr>
+                <th>8–9</th>
+                <th>9–10</th>
+                <th>10–10:30</th>
+                <th>10:30–11:30</th>
+                <th>11:30–12:30</th>
+                <th colspan="3">2–5</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Coursera</td>
+                <td>EEFM</td>
+                <td>—</td>
+                <td>Coursera</td>
+                <td>PCAP</td>
+                <td colspan="3" class="lab">PPL – B2</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- THURSDAY -->
+        <div class="carousel-item" data-day="Thursday">
+          <table class="table table-bordered">
+            <thead class="table-dark">
+              <tr>
+                <th>10–11</th>
+                <th>11–12</th>
+                <th>1–2</th>
+                <th>2–3</th>
+                <th>3–4</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CD</td>
+                <td>OE</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- FRIDAY -->
+        <div class="carousel-item" data-day="Friday">
+          <table class="table table-bordered">
+            <thead class="table-dark">
+              <tr>
+                <th>9–10</th>
+                <th>10–11</th>
+                <th>11–12</th>
+                <th colspan="5">After 1 PM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>OE</td>
+                <td>Coursera</td>
+                <td>EEFM</td>
+                <td colspan="5">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- SATURDAY -->
+        <div class="carousel-item" data-day="Saturday">
+          <table class="table table-bordered">
+            <thead class="table-dark">
+              <tr>
+                <th colspan="4">8:30–11:00</th>
+                <th>11–12</th>
+                <th>1–2</th>
+                <th>2–3</th>
+                <th>3–4</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="4" class="lab">PPL + CDL – B2</td>
+                <td>—</td>
+                <td>Coursera</td>
+                <td>PCAP</td>
+                <td>EEFM</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#timetableCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#timetableCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+
+    <!-- FULL WEEK TABLE -->
+    <h4 class="mt-5 text-center">Full Week Timetable (B2)</h4>
+
+    <table class="table table-bordered text-center">
+      <thead class="table-dark">
+        <tr>
+          <th >Day</th>
+          <th colspan="2">8 – 9</th>
+          <th colspan="2">9 – 10</th>
+          <th></th>
+          <th colspan="2">10:30 – 11:30</th>
+          <th colspan="2">11:30 – 12:30</th>
+          <th></th>
+          <th colspan="2">1 – 2</th>
+          <th colspan="2">2 – 3</th>
+          <th></th>
+          <th colspan="2">3:30 – 4:30</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <th>Mon</th>
+          <td colspan="2" style="background-color: rgb(221, 221, 221);"> PE-1 </td>
+          <td colspan="2" style="background-color: rgb(255, 160, 160);"> PCAP </td>
+          <td style="background-color: rgb(156, 156, 156);"></td>
+          <td colspan="2" style="background-color: rgb(160, 255, 250);">CD</td>
+          <td colspan="2" style="background-color: rgb(232, 60, 255);">YOGA-PRAC</td>
+          <td colspan="9" style="background-color: rgb(156, 156, 156);"></td>
+        </tr>
+
+        <tr>
+          <th>Tues</th>
+          <td style="background-color: rgb(156, 156, 156);"></td>
+          <td style="background-color: rgb(38, 132, 255);"></td>
+          <td colspan="5" style="background-color: rgb(38, 132, 255);">WPL</td>
+          <td colspan="3" style="background-color: rgb(156, 156, 156);"></td>
+          <td colspan="2" style="background-color: rgb(221, 221, 221);"> PE-2</td>
+          <td colspan="2" style="background-color: rgb(160, 255, 250);"> CD </td>
+          <td colspan="3" style="background-color: rgb(156, 156, 156);"></td>
+        </tr>
+
+        <tr>
+          <th>Wed</th>
+          <td colspan="2" style="background-color: rgb(221, 221, 221);">PE-2</td>
+          <td colspan="2" style="background-color: rgb(160, 255, 173);">EEFM</td>
+          <td style="background-color: rgb(156, 156, 156);"></td>
+          <td colspan="2" style="background-color: rgb(221, 221, 221);">PE-1</td>
+          <td colspan="2" style="background-color: rgb(255, 160, 160);">PCAP</td>
+          <td colspan="3" style="background-color: rgb(156, 156, 156);"></td>
+          <td colspan="5" style="background-color: rgb(255, 82, 82);"> PPL </td>
+        </tr>
+
+        <tr>
+          <th>Thur</th>
+          <td colspan="10" style="background-color: rgb(156, 156, 156);"></td>
+          <td colspan="2" style="background-color: rgb(160, 255, 250);"> CD </td>
+          <td colspan="2" style="background-color: rgb(246, 175, 255);"> YOGA </td>
+          <td colspan="3" style="background-color: rgb(156, 156, 156);"></td>
+        </tr>
+
+        <tr>
+          <th>Fri</th>
+          <td colspan="2" style="background-color: rgb(156, 156, 156);"></td>
+          <td colspan="2" style="background-color: rgb(232, 60, 255);"> YOGA-PRAC</td>
+          <td style="background-color: rgb(156, 156, 156);"></td>
+          <td colspan="2" style="background-color: rgb(221, 221, 221);"> PE-2 </td>
+          <td colspan="2" style="background-color: rgb(160, 255, 173);"> EEFM </td>
+          <td colspan="8" style="background-color: rgb(156, 156, 156);"></td>
+        </tr>
+
+        <tr>
+          <th>Sat</th>
+          <td style="background-color: rgb(156, 156, 156);"></td>
+          <td colspan="5" style="background-color: rgb(59, 255, 245);"> CDL </td>
+          <td colspan="4" style="background-color: rgb(156, 156, 156);"></td>
+          <td colspan="2" style="background-color: rgb(221, 221, 221);"> PE-1 </td>
+          <td colspan="2" style="background-color: rgb(255, 160, 160);"> PCAP </td>
+          <td style="background-color: rgb(156, 156, 156);"></td>
+          <td colspan="2" style="background-color: rgb(160, 255, 173);"> EEFM </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const carousel = document.getElementById('timetableCarousel');
+    const heading = document.getElementById('dayHeading');
+
+    carousel.addEventListener('slid.bs.carousel', () => {
+      heading.innerText =
+        carousel.querySelector('.carousel-item.active').dataset.day + " Timetable";
+    });
+  </script>
+
+</body>
+
+</html>

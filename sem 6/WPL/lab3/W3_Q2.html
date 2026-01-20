@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Employee CRUD Operations</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .container {
+            width: 70%;
+            margin: auto;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            width: 95%;
+            padding: 6px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .add {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .update {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .delete {
+            background-color: #f44336;
+            color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #eaeaea;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Employee CRUD Operations</h2>
+
+        <!-- Employee Form -->
+        <label>Employee ID</label>
+        <input type="text" id="empId">
+
+        <label>Employee Name</label>
+        <input type="text" id="empName">
+
+        <label>Department</label>
+        <input type="text" id="empDept">
+
+        <label>Salary</label>
+        <input type="text" id="empSalary">
+
+        <button class="add" onclick="addEmployee()">Add</button>
+        <button class="update" onclick="updateEmployee()">Update</button>
+
+        <!-- Employee Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Salary</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="empTable"></tbody>
+        </table>
+    </div>
+
+    <script>
+        let employees = [];
+        let selectedIndex = -1;
+
+        function addEmployee() {
+            let emp = {
+                id: empId.value,
+                name: empName.value,
+                dept: empDept.value,
+                salary: empSalary.value
+            };
+
+            employees.push(emp);
+            clearFields();
+            displayEmployees();
+        }
+
+        function displayEmployees() {
+            let rows = "";
+            employees.forEach((emp, index) => {
+                rows += `
+                <tr>
+                    <td>${emp.id}</td>
+                    <td>${emp.name}</td>
+                    <td>${emp.dept}</td>
+                    <td>${emp.salary}</td>
+                    <td>
+                        <button class="update" onclick="editEmployee(${index})">Edit</button>
+                        <button class="delete" onclick="deleteEmployee(${index})">Delete</button>
+                    </td>
+                </tr>`;
+            });
+            empTable.innerHTML = rows;
+        }
+
+        function editEmployee(index) {
+            selectedIndex = index;
+            empId.value = employees[index].id;
+            empName.value = employees[index].name;
+            empDept.value = employees[index].dept;
+            empSalary.value = employees[index].salary;
+        }
+
+        function updateEmployee() {
+            if (selectedIndex >= 0) {
+                employees[selectedIndex] = {
+                    id: empId.value,
+                    name: empName.value,
+                    dept: empDept.value,
+                    salary: empSalary.value
+                };
+                clearFields();
+                displayEmployees();
+            }
+        }
+
+        function deleteEmployee(index) {
+            employees.splice(index, 1);
+            displayEmployees();
+        }
+
+        function clearFields() {
+            empId.value = "";
+            empName.value = "";
+            empDept.value = "";
+            empSalary.value = "";
+            selectedIndex = -1;
+        }
+    </script>
+
+</body>
+
+</html>
