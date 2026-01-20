@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Train Ticket Booking</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(120deg, #0d6efd, #6f42c1);
+            min-height: 100vh;
+        }
+        .card {
+            border-radius: 15px;
+        }
+        .form-control, .form-select {
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <!-- Card -->
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center fs-4">
+                    <i class="bi bi-train-front"></i> Train Ticket Booking
+                </div>
+
+                <div class="card-body">
+                    <form>
+
+                        <!-- From & To -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">From</label>
+                                <input type="text" class="form-control" placeholder="Enter source station">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">To</label>
+                                <input type="text" class="form-control" placeholder="Enter destination station">
+                            </div>
+                        </div>
+
+                        <!-- Date & Class -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Journey Date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Class</label>
+                                <select class="form-select">
+                                    <option selected>Select Class</option>
+                                    <option>First Class</option>
+                                    <option>Second Class</option>
+                                    <option>Sleeper</option>
+                                    <option>AC</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Passengers & Quota -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Number of Passengers</label>
+                                <input type="number" class="form-control" min="1" max="6">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Quota</label>
+                                <select class="form-select">
+                                    <option>General</option>
+                                    <option>Ladies</option>
+                                    <option>Senior Citizen</option>
+                                    <option>Tatkal</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Preferences -->
+                        <div class="mb-3">
+                            <label class="form-label">Preferences</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Lower Berth</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Window Seat</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label">Meal Required</label>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="reset" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle"></i> Reset
+                            </button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-search"></i> Search Trains
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="card-footer text-center text-muted">
+                    © 2026 Railway Booking System
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
